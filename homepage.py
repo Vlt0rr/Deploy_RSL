@@ -2,6 +2,7 @@ import streamlit as st
 import datetime
 import pandas as pd
 from streamlit_gsheets import GSheetsConnection
+from data_loader import carregar_dados
 
 
 secao_usuario = st.session_state
@@ -77,7 +78,7 @@ if st.button('Enviar'):
 
         # Update Google Sheets with the new vendor data
         conn.update(worksheet="Dados", data=updated_df)
-        st.experimental_rerun()
+        carregar_dados()
         st.success("Formulário preenchido com sucesso!")
 
 if nome_do_usuario == "Ronaldo":
@@ -104,6 +105,6 @@ if nome_do_usuario == "Ronaldo":
 
             # Update Google Sheets with the new vendor data
             conn.update(worksheet="Dados", data=updated_df)
-            st.experimental_rerun()
+            carregar_dados()
             st.success("Data de término submetida com sucesso")
 
