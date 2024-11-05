@@ -77,7 +77,7 @@ if st.button('Enviar'):
 
         # Update Google Sheets with the new vendor data
         conn.update(worksheet="Dados", data=updated_df)
-
+        st.experimental_rerun()
         st.success("Formulário preenchido com sucesso!")
 
 if nome_do_usuario == "Ronaldo":
@@ -104,6 +104,6 @@ if nome_do_usuario == "Ronaldo":
 
             # Update Google Sheets with the new vendor data
             conn.update(worksheet="Dados", data=updated_df)
-
+            st.experimental_rerun()
             st.success("Data de término submetida com sucesso")
 
