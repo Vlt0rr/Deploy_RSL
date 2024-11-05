@@ -4,7 +4,7 @@ from data_loader import carregar_dados
 from homepage import coluna_esquerda, coluna_direita
 import pandas as pd
 import plotly.express as px
-from data_loader import carregar_dados
+
 
 base = carregar_dados()
 
@@ -16,7 +16,7 @@ def criar_card(icone, numero, texto, coluna_card):
     coluna_esquerda.image(f"imagem/{icone}")
     coluna_direita.write(numero)
     coluna_direita.write(texto)
-    carregar_dados()
+    
 
 coluna_esquerda, coluna_meio, coluna_direita = st.columns([1, 1, 1])
 
