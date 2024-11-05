@@ -4,9 +4,16 @@ from data_loader import carregar_dados
 from homepage import coluna_esquerda, coluna_direita
 import pandas as pd
 import plotly.express as px
+from streamlit_gsheets import GSheetsConnection
 
+# Estabelecendo a conexão com o Google Sheets
+conn = st.connection("gsheets", type=GSheetsConnection)
 
-base = carregar_dados()
+# Pegando os dados existentes da planilha/banco
+existing_data = conn.read(worksheet="Dados", usecols=list(range(7)), ttl=5)
+existing_data = existing_data.dropna(how="all")
+
+base = existing_data
 
 st.title("Indicadores")
 
