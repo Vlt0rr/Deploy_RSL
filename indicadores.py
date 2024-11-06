@@ -6,7 +6,14 @@ import pandas as pd
 import plotly.express as px
 from streamlit_gsheets import GSheetsConnection
 
-base = carregar_dados()
+# Estabelecendo a conexão com o Google Sheets
+conn = st.connection("gsheets", type=GSheetsConnection)
+
+# Pegando os dados existentes da planilha/banco
+existing_data = conn.read(worksheet="Dados", usecols=list(range(7)), ttl=5)
+existing_data = existing_data.dropna(how="all")
+
+base = existing_data
 
 st.title("Indicadores")
 
@@ -16,7 +23,7 @@ def criar_card(icone, numero, texto, coluna_card):
     coluna_esquerda.image(f"imagem/{icone}")
     coluna_direita.write(numero)
     coluna_direita.write(texto)
-    
+    carregar_dados()
 
 coluna_esquerda, coluna_meio, coluna_direita = st.columns([1, 1, 1])
 
