@@ -15,8 +15,8 @@ db_url = f'postgresql+psycopg2://{username}:{password}@{host}:{port}/{database}'
 
 # Crie a engine de conexão
 db = create_engine(db_url)
-Session = sessionmaker(bind=db)
-session = Session()
+session = sessionmaker(bind=db)
+Session = session()
 
 Base = declarative_base()
 
