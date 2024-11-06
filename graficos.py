@@ -2,15 +2,9 @@ import pandas as pd
 import plotly.express as px
 import streamlit as st
 from streamlit_gsheets import GSheetsConnection
+from data_loader import carregar_dados
 
-# Estabelecendo a conexão com o Google Sheets
-conn = st.connection("gsheets", type=GSheetsConnection)
-
-# Pegando os dados existentes da planilha/banco
-existing_data = conn.read(worksheet="Dados", usecols=list(range(7)), ttl=5)
-existing_data = existing_data.dropna(how="all")
-
-base = existing_data
+base = carregar_dados()
 
 # Verificar e corrigir valores inválidos nas colunas de hora
 base['Hr_inicio'] = pd.to_datetime(base['Hr_inicio'], format='%H:%M:%S', errors='coerce')
