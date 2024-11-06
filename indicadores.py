@@ -1,6 +1,5 @@
 import streamlit as st
 from streamlit import container
-from data_loader import carregar_dados
 from homepage import coluna_esquerda, coluna_direita
 import pandas as pd
 import plotly.express as px
