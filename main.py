@@ -9,7 +9,16 @@ from criar_admin import usuario
 #autenticator usado: pip install streamlit-authenticator==0.3.3(versão mais atual dá erro)
 
 #query que pega todos os usuario e coloca em uma lista python
-lista_usuarios = Session.query(Usuario).all()
+
+try:
+    lista_usuarios = Session.query(Usuario).all()
+except Exception as e:
+    Session.rollback()
+    print("Erro ao buscar usuários:", e)
+finally:
+    Session.close()
+    
+#lista_usuarios = Session.query(Usuario).all()
 
 #senhas_criptogradas = stauth.Hasher(["1234", "12345", "123456"]).generate()
 
