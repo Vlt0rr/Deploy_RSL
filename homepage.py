@@ -25,7 +25,7 @@ conn = st.connection("gsheets", type=GSheetsConnection)
 existing_data = conn.read(worksheet="Dados", usecols=list(range(7)), ttl=5)
 existing_data = existing_data.dropna(how="all")
 
-lista_projetos = ['', 'CDS', 'VDS', 'OVS', 'TDS', 'BDS', 'TELM', 'TOT']
+lista_projetos = ['', 'CDS', 'VDS', 'ODS', 'TDS', 'BDS', 'TELM', 'TOT']
 
 # Campo 'Área' com lista suspensa
 area = st.selectbox(
@@ -81,7 +81,7 @@ if st.button('Enviar'):
 
         st.success("Formulário preenchido com sucesso!")
 
-if nome_do_usuario == "Ronaldo":
+if nome_do_usuario == "Ronaldo" or nome_usuario == "Vitor":
     data_termino = st.date_input("Informe a data de finalização do projeto")
 
     if st.button("Submeter data"):
