@@ -10,13 +10,27 @@ from criar_admin import usuario
 
 # query que pega todos os usuario e coloca em uma lista python
 
+
+
 try:
     lista_usuarios = Session.query(Usuario).all()
+    if not lista_usuarios:
+        raise ValueError("Nenhum usuário encontrado no banco de dados.")
 except Exception as e:
     Session.rollback()
     print("Erro ao buscar usuários:", e)
+    lista_usuarios = []
 finally:
     Session.close()
+
+
+#try:
+ #   lista_usuarios = Session.query(Usuario).all()
+#except Exception as e:
+ #   Session.rollback()
+  #  print("Erro ao buscar usuários:", e)
+#finally:
+ #   Session.close()
 
 # lista_usuarios = Session.query(Usuario).all()
 
