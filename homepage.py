@@ -2,7 +2,6 @@ import streamlit as st
 import datetime
 import pandas as pd
 from streamlit_gsheets import GSheetsConnection
-from data_loader import carregar_dados
 
 
 secao_usuario = st.session_state
@@ -46,6 +45,7 @@ numero_projeto = st.text_input('Número do projeto')
 # Campos de horário de início e término da atividade
 hora_inicio = st.time_input('Horário de início da atividade', datetime.time(8, 0))
 hora_termino = st.time_input('Horário de término da atividade', datetime.time(17, 0))
+st.warning("Caso você tenha almoçado e não preecheu o formulário, desconte a quantidade de tempo gasta durante o almoço no preenchimento.")
 
 # Campo de data travado na data atual
 data_atual = datetime.date.today()
@@ -78,6 +78,7 @@ if st.button('Enviar'):
 
         # Update Google Sheets with the new vendor data
         conn.update(worksheet="Dados", data=updated_df)
+
         st.success("Formulário preenchido com sucesso!")
 
 if nome_do_usuario == "Ronaldo":
@@ -104,5 +105,5 @@ if nome_do_usuario == "Ronaldo":
 
             # Update Google Sheets with the new vendor data
             conn.update(worksheet="Dados", data=updated_df)
-            st.success("Data de término submetida com sucesso")
 
+            st.success("Data de término submetida com sucesso")
