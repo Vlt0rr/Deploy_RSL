@@ -31,6 +31,19 @@ projeto_selecionado = st.selectbox("Selecione o projeto", base['Projeto'].unique
 # Filtrar os dados pelo projeto selecionado
 filtro_projeto = base[base['Projeto'] == projeto_selecionado]
 
+df_projeto_ordenado = filtro_projeto.sort_values(by='Data')
+
+data_inicial_projeto = df_projeto_ordenado.iloc[0,5]
+df_filtro_dt_termino = existing_data[
+    (existing_data['Projeto'] == projeto_selecionado) &
+    (existing_data['Data_termino'].notna())
+]
+
+if not df_filtro_dt_termino.empty:
+    data_final_projeto = df_filtro_dt_termino.iloc[0,6]
+else:
+    data_final_projeto = 'Não finalizado.'
+
 # Seleção de intervalo de datas pelo usuário
 intervalo_datas = st.date_input("Selecione o intervalo de datas", [])
 
@@ -47,3 +60,6 @@ horas_por_area = filtro_projeto.groupby('Area')['Horas_trabalhadas'].sum().reset
 # Criar o gráfico com todas as áreas para o projeto e período selecionados
 fig = px.bar(horas_por_area, x='Area', y='Horas_trabalhadas', title="Total de Horas Trabalhadas por Área")
 st.plotly_chart(fig)
+
+st.info(f"Data de inicio: {data_inicial_projeto}")
+st.info(f"Data de término: {data_final_projeto}")
