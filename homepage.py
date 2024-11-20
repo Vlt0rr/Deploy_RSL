@@ -81,7 +81,7 @@ if st.button('Enviar'):
 
         st.success("Formulário preenchido com sucesso!")
 
-if nome_do_usuario == "Ronaldo" or nome_usuario == "Vitor":
+if nome_do_usuario == "Ronaldo" or nome_do_usuario == "Vitor":
     data_termino = st.date_input("Informe a data de finalização do projeto")
 
     if st.button("Submeter data"):
